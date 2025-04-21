@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>JavaScript Datatyper</title>
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+         
+          margin: auto;
+          padding: 20px;
+          line-height: 1.6;
+        }
+        code {
+          background-color: #c7b8b8;
+          padding: 4px 6px;
+          border-radius: 4px;
+        }
+        pre {
+          background-color: #f4f4f4;
+          padding: 10px;
+          border-radius: 5px;
+          overflow-x: auto;
+        }
+    
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+      </style>
+</head>
+<body>
+
+
+    <div class="header"> JavaScript</div>
+        <nav class="menu">
+            <a href="Forside.html">Forside</a>
+            <a href="Programmering-eksempler.html">Programmering Emner</a>
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="Forloeb.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+
+    <div class="content">
+    <h1>JavaScript Datatyper</h1>
+    <h2>Number</h2>
+    <p>Bruges til at repræsentere både hele tal og decimaler.</p>
+    <pre><code>let age = 30;  // Heltal</code></pre>
+    <pre><code>let price = 19.99; // Decimaltal</code></pre>
+
+    <h2>BigInt</h2>
+    <p>Bruges til at håndtere meget store heltal, som ikke kan repræsenteres af standard Number.</p>
+    <pre><code>let bigNum = 1234567890123456789012345678901234567890n;</code></pre>
+
+    <h2>String</h2>
+    <p>Bruges til tekst og kan oprettes med enten enkelt-, dobbelt- eller backticks (`).</p>
+    <pre><code>let message = "Hej, verden!";</code></pre>
+    <pre><code>let greeting = 'Velkommen!';</code></pre>
+    <pre><code>let name = `Navn: Alice`;</code></pre>
+
+    <h2>Boolean</h2>
+    <p>Repræsenterer to mulige værdier: true (sand) og false (falsk). Bruges ofte i betingelser og loops.</p>
+    <pre><code>let isActive = true;</code></pre>
+    <pre><code>let isComplete = false;</code></pre>
+
+    <h2>Null</h2>
+    <p>Angiver, at en variabel bevidst er uden værdi. Det betyder, at der ikke er nogen data knyttet til den.</p>
+    <pre><code>let person = null;  // Ingen værdi</code></pre>
+
+    <h2>Undefined</h2>
+    <p>En variabel, der er erklæret, men ikke tildelt en værdi, har værdien undefined.</p>
+    <pre><code>let user;</code></pre>
+    <pre><code>console.log(user); // undefined</code></pre>
+
+    <h2>Object</h2>
+    <p>Bruges til at gemme samlinger af data. Et objekt kan indeholde flere nøgle-værdi-par.</p>
+    <pre><code>let person = { name: "Alice", age: 25 }; </code></pre>
+
+    <h2>Symbol</h2>
+    <p>En unik og uforanderlig værdi, som ofte bruges til at skabe unikke identifikatorer.</p>
+    <pre><code>let uniqueId = Symbol("id");</code></pre>
+
+
+    <h1>Automatisk og Tvangs-konvertering i JavaScript</h1>
+
+    <h2>1. Automatisk konvertering</h2>
+    <p>
+        Når du bruger <code>+</code> mellem en streng og et tal, tvinges tallet til at blive en streng:
+    </p>
+    <pre><code>let result = "The number is " + 5;  // JavaScript konverterer 5 til en streng, så resultatet bliver "The number is 5"</code></pre>
+
+    <h2>2. Tvinge konvertering</h2>
+    <p>
+        Med funktioner som <code>Number()</code>, kan du tvinge en værdi til en bestemt datatype:
+    </p>
+    <pre><code>let num = "123"; 
+let convertedNum = Number(num); // '123' bliver nu et tal (123)</code></pre>
+    <p>
+        Hvis du prøver at konvertere noget, der ikke er et tal, som f.eks. <code>"abc"</code>, vil det returnere <code>NaN</code> (Not a Number).
+    </p>
+
+    <h2>3. Konvertering af falske værdier</h2>
+    <p>
+        JavaScript betragter bestemte værdier som "falske" i betingelser, hvilket betyder, at de automatisk konverteres til <code>false</code>:
+    </p>
+    <pre><code>if (!null) console.log("null er falsk");  // Dette bliver logget, fordi null konverteres til false</code></pre>
+    <p>
+        Værdier som <code>null</code>, <code>undefined</code>, en tom streng <code>""</code>, <code>0</code>, og <code>NaN</code> betragtes som falske, og derfor udløser de betingelsen i <code>if</code>-sætningen.
+    </p>
+
+
+
+    <h4>Kilder</h4>
+ <a href="https://javascript.info/types">Javascript datatyper  javacript.info</a>
+
+
+ </div>
+
+
+</body>
+</html>

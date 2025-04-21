@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forløb</title>
+        <style>.header3 {
+            text-align: center !important;
+            font-size: 40px;
+        }
+        .leftcolumn2 {
+            border : 1px solid black;
+            padding: 20px;
+        }
+        
+        .leftcolumn2 p {
+            line-height: 2.0;
+        }
+
+        .code1 {
+            background-color: black;
+            color: white;
+            padding: 10px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header3">Minecraft combosite opgave</div>
+        <nav class="menu">
+            <a href="Forside.html">Forside</a>
+            <a href="Programmering-eksempler.html">Programmering Emner</a>
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="Forloeb.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+        <div class="row">
+            <div class="leftcolumn2">
+                
+                <h2> Minecraft Opgave</h2>
+                <p> <strong>Opgave 1:</strong> Implementer Boots i dit ArmorSet ændre koden, så du tilføjer Boots. Implementér en ny klasse ved navn Boots, <br>
+                    som følger samme mønster som de eksisterende klasser Helmet og Chestplate <br>
+                   <strong> Opgave 2:</strong> Implementer Nested Composite med Forskellige Rustninger ændre koden, så du opretter flere typer rustninger <br>
+                    som Leather, Iron, Gold, og Diamond. Brug det samme Composite Pattern til at skabe et hierarki, hvor et sæt kan bestå af <br>
+                    flere typer rustninger. <br>
+                   <strong> Opgave 3:</strong> Visualiser dit composite i et UML-diagram. Tegn et UML-diagram, der viser strukturen af dit ArmorSet. Sørg for, <br>
+                    at både interfacet, konkrete klasser, og compositen er inkluderet.<br>
+                    <strong>Extra Opgave.</strong> Brug State Patten til at oprette tilstande som fx mængde eller tid af beskyttelse et enkelt Hjelm eller<br>
+                    chestplate giver. Eller fx Hurtighed. </p> 
+            
+        
+
+                <h2>Løsning og kodeforklaring</h2>
+                <p class="code1"> interface Armor { <br>
+                    void equip(); <br>
+                  } <br></p>
+                  <p>Opretter et interface Armor med en metode equip(). <br>
+
+                    Alle rustningsgenstande (fx hjelm og brystplade) skal implementere denne metode.</p>
+
+                    <p class="code1">
+
+                        class ArmorSet implements Armor { <br>
+                            ArrayList<Armor> armors = new ArrayList<Armor>(); <br>
+                          
+                            void addArmor(Armor armor) { <br>
+                              armors.add(armor); <br>
+                            } <br>
+                          
+                            public void equip() { <br>
+                              for (Armor armor : armors) { <br>
+                                armor.equip();  <br>
+                               } <br>
+                              } <br>
+                            } <br>
+                    </p>
+                    <p>
+                        ArmorSet er en klasse, der implementerer Armor-interfacet. <br>
+
+                        Dette betyder, at ArmorSet skal implementere metoden equip(), da den er defineret i Armor-interfacet. <br>
+
+                        armors er en liste (ArrayList), der kan indeholde objekter af typen Armor. <br>
+
+                        Dette gør det muligt at tilføje forskellige rustningsdele (f.eks. Helmet, Chestplate) til sættet. <br>
+
+                        Metode til at Tilføje Rustningsdele <br>
+                        
+                        addArmor(Armor armor): <br>
+
+                        En metode, der tager et objekt af typen Armor som parameter. <br>
+                        
+                        Tilføjer det til listen armors. <br>
+                        
+                        Dette gør det muligt at bygge et sæt af rustningsdele dynamisk. <br>
+
+                        Implementering af equip()-Metoden :  <br>
+
+                        equip()-metoden kaldes for at tage hele rustningssættet på. <br>
+
+                        Den gennemløber (for-each loop) listen armors og kalder equip() på hver enkelt rustningsdel. <br>
+
+                        Da Helmet og Chestplate (eller andre Armor-typer) <br>
+                        
+                        implementerer equip(), vil de hver især udføre deres specifikke equip()-handling. <br>
+
+
+                    </p>
+            </div>

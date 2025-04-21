@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javascript Introtuktion</title>
+        <style>
+            body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              margin: 20px;
+              background-color: #f4f4f9;
+            }
+            h1 {
+              color: #333;
+            }
+            h2 {
+              color: #555;
+            }
+            p, ul {
+              color: #444;
+            }
+            code {
+              display: block;
+              background: #f9f9f9;
+              padding: 10px;
+              border-left: 3px solid #333;
+              margin: 10px 0;
+              white-space: pre-wrap;
+            }
+          </style>
+    </head>
+    <body>
+        <div class="header">Javascript funktioner</div>
+        <nav class="menu">
+            <a href="Forside.html">Forside</a>
+            <a href="Programmering-eksempler.html">Programmering Emner</a>
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="#">Info</a>
+        </nav>
+
+        <div class="row">
+            <div class="leftcolumn">
+                <div class="card">
+                    <h2>Javascript funktioner</h2>
+                     <h5></h5>
+                    <div class ="innercontent">
+                    
+                        <h1></h1>
+<p>En JavaScript-funktion er en blok af kode, der er designet til at udføre en bestemt opgave. Funktioner kan tage input (kaldet parametre eller argumenter), udføre handlinger baseret på dette input og returnere et resultat. Funktioner er en grundlæggende byggesten i JavaScript og bruges til at organisere kode, gøre den genanvendelig og let at vedligeholde.
+
+  Her er et simpelt eksempel på en JavaScript-funktion:.</p>
+  <p>Vi har allerede set eksempler på indbyggede funktioner som alert(message), prompt(message, default)og confirm(question). Men vi kan også lave vores egne funktioner.</p>
+  
+  <h3>Funktionserklæring</h3>
+    <p>For at oprette en funktion kan vi bruge en funktionserklæring .
+
+      Det ser sådan ud:</p>
+
+      <p style="background-color: #ccc9c9;">function showMessage() { <br>
+        alert( 'Hello everyone!' ); <br>
+      }</p> 
+      <p>Når erklærer en funktion så vil der ikke ske noget, den bliver blot oprettet i hukomelsen. <br> for at kør koden skal man call funktionen ved i dette tilfælde bruge Showmessage();
+      </p>
+      <h3>Lokal Variable</h3>
+
+      <p>Når man laver en funktion kan en variable kun læses i selve funktionen, </p>
+      <p style="background-color: #ccc9c9;">function showMessage() { <br>
+        let message = "Hello, I'm JavaScript!"; // local variable <br>
+      
+        alert( message ); <br>
+      } <br>
+      
+      showMessage(); // Hello, I'm JavaScript! <br>
+      
+      alert( message ); //  Error! The variable is local to the function</p>
+      <p>som man kan se på koden, så har vi en variable som hedder message, vi laver en alert, så at vi kan vise teksten i vores variable, og dette vises først når vi kalder på funktionen
+        showMessage, Når vi prøver at lave en alert besked udenfor funktionen, så vil den vise en fejl.</p>
+        <h3>Global Variable</h3>
+        <p>En global variable er en variable som kan læses i hele programmet, </p>
+        <p style="background-color: #ccc9c9;">let userName = 'John'; <br>
+
+          function showMessage() { <br>
+            let message = 'Hello, ' + userName; <br>
+            alert(message); <br>
+          } <br>
+          
+          showMessage(); // Hello, John</p>
+          <p>på kode eksempelet kan man se en glbal variable userName med værdien john, den kan
+             tilgåes af hele programmet, som kan ses i koden så henter vi userName og sætter
+              den sammen med message, som viser begge værdier når vi kalder på funktionen</p>
+              <p> Her kan vi se hvordan vi kan ændre variablens værdi i funktionen. I funktionen ændre vi værdien af userName fra john til bob.
+                john er global værdi og kan læses af hele programmet, som gør at vi kan ændre værdien af userName i funktionen. Når vi alert username for anden gang så ser vi at den har ændrede værdi til Bob. 
+              </p>
+              <p style=" background-color: #ccc9c9;">let userName = 'John'; <br>
+
+                function showMessage() { <br>
+                  userName = "Bob"; // (1) changed the outer variable <br>
+                
+                  let message = 'Hello, ' + userName; <br>
+                  alert(message); <br>
+                } <br>
+                
+                alert( userName ); // John before the function call <br>
+                
+                showMessage();  <br>
+                
+                alert( userName ); // Bob, the value was modified by the function</p>
+
+                <h3>Parameter</h3>
+                <p>I denne kodeeksempel ser vi, hvordan funktioner kan tage parametre for at gøre dem mere fleksible og genanvendelige.</p>
+                <p style="background-color: #ccc9c9;">function showMessage(from, text) { // parameters: from, text <br>
+                  alert(from + ': ' + text);
+                } <br>
+                
+                showMessage('Ann', 'Hello!');  <br>
+                showMessage('Ann', "What's up?");</p> <br>
+                <p>Funktionens navn: showMessage
+                  Parametre: from og text – de fungerer som lokale variabler inde i funktionen.
+                  Inde i funktionen bruger vi alert() til at vise en besked.
+                  Kombinering af tekst: from + ': ' + text sammensætter strenge ved at bruge +-operatoren.</p>
+                  <p>Første kald: "Ann" bliver sat som from, og "Hello!" som text, så beskeden der vises er:
+                    Ann: Hello!</p>
+                    <p>Andet kald: "Ann" er stadig from, men "What's up?" er nu text, så beskeden bliver:
+                      Ann: What's up?</p>
+                      <h3>default værdier i funktioner</h3>
+                      <p>Når showMessage('Ann', 'Hello!') kaldes, bliver værdierne "Ann" og "Hello!" kopieret til parametrene from og text. Inde i funktionen bruges disse værdier til at danne beskeden.</p>
+                      <p>I JavaScript kan vi angive standardværdier for funktioners parametre. Hvis en funktion kaldes uden en værdi for en parameter, bliver den undefined. Men vi kan give parametre standardværdier, så de får en foruddefineret værdi, hvis ingen værdi gives.</p>
+                      <p>Eksempel 1: Manglende parameter bliver undefined</p>
+                      <p style="background-color: #ccc9c9;">function showMessage(from, text) { <br>
+                        alert(from + ": " + text); <br>
+                      } <br>
+                      
+                      showMessage("Ann"); // Ann: undefined</p>
+                      <p>Funktionen showMessage tager to parametre: from og text.
+                        Når vi kalder showMessage("Ann"), mangler argumentet for text.
+                        Resultat: text bliver undefined, og output bliver:
+                        Anne:Undifined
+                        </p>
+                        <p>Eksempel 2: Tilføjelse af en standardværdi</p>
+                        <p style="background-color: #ccc9c9;">function showMessage(from, text = "no text given") { <br>
+                          alert(from + ": " + text); <br>
+                        } <br>
+                        
+                        showMessage("Ann"); // Ann: no text given</p>
+                        <p>Vi angiver en default-værdi for text ved at skrive text = "no text given".
+                          Hvis text ikke er angivet, bruges "no text given".
+                          </p>
+                          <p>Eksempel 3: Hvis værdien er undefined</p>
+                          <p style="background-color: #ccc9c9;">showMessage("Ann", undefined); // Ann: no text given</p>
+                          <p>Når vi eksplicit sender undefined som argument, træder standardværdien i kraft. 
+                            så får vi resultat
+                            Ann: no text given</p>
+                            <p>Eksempel 4: Brug af en funktion som standardværdi</p>
+                            <p style="background-color: #ccc9c9;">function anotherFunction() { <br>
+                              return "Generated text"; <br>
+                            } <br>
+                            
+                            function showMessage(from, text = anotherFunction()) { <br>
+                              alert(from + ": " + text); <br>
+                            } <br>
+                            
+                            showMessage("Ann"); // Ann: Generated text</p>
+                            <p>Hvis text ikke gives, kalder JavaScript anotherFunction(), som returnerer "Generated text".</p>
+                            <h3>Alternative standardparametre</h3>
+                            <p>Nogle gange giver det mening at tildele standardværdier for parametre på et senere tidspunkt efter funktionserklæringen.
+
+                              Vi kan kontrollere, om parameteren er vidergivet under funktionsudførelsen, ved at sammenligne den med undefined:</p>
+                              <p style="background-color: #ccc9c9;">function showMessage(text) { <br>
+                                // ... 
+                              
+                                if (text === undefined) { // if the parameter is missing  <br>
+                                  text = 'empty message'; <br>
+                                } <br>
+                              
+                                alert(text); <br>
+                              } <br>
+                              
+                              showMessage(); // empty message</p>
+
+                              <h3>Eksempler på funktioner med passende navne:
+                                </h3>
+
+                              <p>
+                                Funktioner repræsenterer handlinger, så deres navn er normalt et udsagnsord. Navnet bør være kort, præcist og beskrive, hvad funktionen gør, så enhver, der læser koden, hurtigt kan forstå dens formål.<br>
+                                
+                                Det er en almindelig praksis at starte en funktion med et ord, der groft beskriver handlingen.<br>
+                                
+                                Almindelige præfikser til funktionsnavne:<br>
+                                "show…" → viser noget <br>
+                                "get…" → returnerer en værdi <br>
+                                "calc…" → beregner noget  <br>
+                                "create…" → opretter noget <br>
+                                "check…" → tjekker en betingelse og returnerer true/false</p>
+
+                                <p>Eksempler på funktioner med passende navne: <br>
+                                  
+                                  
+                                
+                                  showMessage(..)     // viser en besked <br>
+                                  getAge(..)          // returnerer en alder (henter den på en eller anden måde) <br>
+                                  calcSum(..)         // beregner en sum og returnerer resultatet <br>
+                                  createForm(..)      // opretter en formular (og returnerer den typisk) <br>
+                                  checkPermission(..) // tjekker en tilladelse, returnerer true/false</p>
+                                  
+                                  
+
+
+                                  <h3>calback function</h3>
+
+                                  <p>Callback-funktioner
+                                    Callback-funktioner er en grundlæggende del af JavaScript og mange andre programmeringssprog. De giver dig mulighed for at sende funktioner som argumenter til andre funktioner og udføre dem senere, ofte som svar på en begivenhed eller en betingelse.</p>
+                                    <p>I dette eksempel har vi defineret tre funktioner: myDisplayer, myFirst og mySecond. Disse funktioner bruges til at vise en besked i et HTML-element med id'et demo</p>
+
+                                    <p style="background-color: #ccc9c9;">function myDisplayer(some) { <br>
+                                      document.getElementById("demo").innerHTML = some; <br>
+                                  } <br>
+                                  
+                                  function myCalculator(num1, num2, myCallback) { <br>
+                                      let sum = num1 + num2; <br>
+                                      myCallback(sum); // Kalder callback-funktionen med resultatet <br>
+                                  } <br>
+                                  
+                                  myCalculator(5, 5, myDisplayer); // Her sendes `myDisplayer` som en callback
+                                      
+                                      </P>
+
+                                      <p>Forklaring: <br>
+                                        1. myCalculator funktionen tager tre parametre: num1, num2 og myCallback. <br>
+                                        
+                                        2. Den beregner summen af num1 og num2. <br>
+                                        
+                                        3. Derefter kalder den myCallback-funktionen og sender summen som argument. <br>
+                                        
+                                        4. myDisplayer funktionen viser resultatet i HTML-elementet med id'et demo. <br>
+                                        
+                                        </p>
+
+                                        <p>
+                                          Callbacks er nyttige, når du har brug for at udføre en handling efter at en anden handling er fuldført. De er især vigtige i asynkrone situationer, f.eks.:
+
+                                          API-kald: Vent på data fra en server, og udfør derefter en handling.
+
+                                          Timere: Udfør en handling efter en forsinkelse med setTimeout.
+
+                                          Filindlæsning: Vent på, at en fil er indlæst, og udfør derefter en handling.
+                                        </p>
+                                        <p>Du kan læse mere på
+                                          <p ><a href="https://www.w3schools.com/js/js_callback.asp"> W3schools javascript callback.</a>
+                                            og <a href="https://javascript.info/function-basics">Basic javascript funktioner.</a>
+                                          
+                                        </p>
+                             
+
+                    </body>
+                </div>
+                </div>
+                </div>
+
+                
+
+            </div>
+    </body>
+</html>

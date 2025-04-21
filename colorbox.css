@@ -1,0 +1,82 @@
+
+#myButton {
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+#myButton:hover {
+    background-color: antiquewhite;
+}
+
+#dblClickButton {
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+#dblClickButton:hover {
+    background-color: antiquewhite;
+}
+
+/* Styling for boksen */
+#box {
+    width: 200px;
+    height: 200px;
+    background-color: lightgray;
+    position: relative;
+    margin: 20px;
+    text-align: center;
+    line-height: 200px; /* Center teksten vertikalt */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease; /* Glidende overgang */
+}
+
+/* Hover-effekt for boksen */
+#box:hover {
+    transform: scale(1.2); /* Forstør boksen */
+}
+
+/* Styling for tooltip */
+#tooltip {
+    display: none;
+    position: absolute;
+    bottom: 110%; /* Placeres lige over boksen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Undgå tekstombrydning */
+}
+
+#myButton2 {
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    user-select: none;
+}

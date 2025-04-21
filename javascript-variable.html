@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Hvad er en variabel?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+     
+      margin: auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    code {
+      background-color: #c7b8b8;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div class="header"> Javascript</div>
+        <nav class="menu">
+            <a href="Forside.html">Forside</a>
+            <a href="Programmering-eksempler.html">Programmering Emner</a>
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="Forloeb.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+<div class="content">
+  <h1>🧠 Hvad er en variabel?</h1>
+  <p>En variabel er en "beholder", hvor du kan gemme information – f.eks. et navn, en alder, eller resultatet af en udregning. Du kan tænke på det som en navngivet æske, hvor du gemmer noget data, som du gerne vil bruge senere i dit program.</p>
+
+  <h2>🛠️ Sådan opretter du en variabel</h2>
+  <p>Du opretter en variabel i JavaScript med nøgleordene <code>let</code>, <code>const</code> eller <code>var</code>:</p>
+
+  <pre><code>let navn = "Anna";</code></pre>
+
+  <ul>
+    <li><code>let</code> bruges, når du har brug for at ændre indholdet senere.</li>
+    <li><code>const</code> bruges, når indholdet ikke skal ændres.</li>
+    <li><code>var</code> er den gamle måde – den bør du ikke bruge mere (medmindre du ved, hvad du laver).</li>
+  </ul>
+
+  <h2>🧪 Eksempler:</h2>
+  <pre><code>let alder = 20;
+const fødselsland = "Danmark";</code></pre>
+
+  <p>Her har vi:</p>
+  <ul>
+    <li>en variabel <code>alder</code>, som vi gerne vil kunne ændre senere.</li>
+    <li>en konstant <code>fødselsland</code>, som ikke må ændres.</li>
+  </ul>
+
+  <h2>🔁 Ændre værdien af en variabel</h2>
+  <pre><code>let humør = "glad";
+humør = "træt";</code></pre>
+  <p>Her ændrer vi indholdet af variablen <code>humør</code> fra "glad" til "træt".</p>
+
+  <h2>⚠️ Vigtige regler for variabelnavne:</h2>
+  <ul>
+    <li>Navne må ikke starte med tal.</li>
+    <li>Brug ikke mellemrum.</li>
+    <li>De må ikke hedde noget, som allerede bruges af JavaScript (som <code>let</code>, <code>var</code>, <code>function</code>).</li>
+    <li>Gode navne er beskrivende: <code>brugerNavn</code>, <code>antalBananer</code>.</li>
+  </ul>
+
+  <h2>🧩 Opsummering:</h2>
+  <ul>
+    <li>En variabel gemmer data.</li>
+    <li>Brug <code>let</code> hvis du skal ændre værdien senere.</li>
+    <li>Brug <code>const</code> hvis værdien aldrig skal ændres.</li>
+    <li>Variabelnavne skal være klare og meningsfulde.</li>
+  </ul>
+
+  <h4>Kilder</h4>
+  <a href="//developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Variables">MDN Web Docs</a><br>
+  <a href="https://javascript.info/variables">JavaScript.info</a><br>
+</div>
+</body>
+</html>

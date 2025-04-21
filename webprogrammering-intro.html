@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Programmering B</title>
+    </head>
+    <body>
+        <div class="header" >Intro til Webprogrammering</div>
+        <nav class="menu">
+            <a href="Forside.html">Forside</a>
+            <a href="Programmering-eksempler.html">Programmering Emner</a>
+            <a href="Forloeb.html">Forløb</a>
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="#">Info</a>
+        </nav>
+
+        <!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webprogrammering</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #005f73;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    a {
+      color: #0077cc;
+    }
+
+    .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+  </style>
+</head>
+<body>
+    <div class="content">
+  <h1>Webprogrammering</h1>
+<!---
+  <section>
+    <h2>Planlagt forløb</h2>
+    <ul>
+      <li>Introduktion til p5.js</li>
+      <li>Intro til HTML og CSS</li>
+      <li>Opret vores egen hjemmeside</li>
+      <li>Hjemmeside der viser og manipulerer data på localhost</li>
+      <li>Brug af JS, HTML, CSS, SQLite og cookies</li>
+      <li>Brug af jQuery</li>
+    </ul>
+  </section>
+-->
+  
+  <section>
+    <img src="Skærmbillede 2025-04-11 094644.png" alt="Skærmbillede">
+    <h2>Hjemmeside</h2>
+    <p>Hjemmesider er bygget af:</p>
+    <ul>
+      <li><strong>HTML:</strong> Struktur og indhold</li>
+      <li><strong>CSS:</strong> Udseende og design</li>
+      <li><strong>JavaScript:</strong> Funktionalitet og manipulation af HTML/CSS/data</li>
+    </ul>
+  </section>
+
+  <section>
+
+    <h2>HTTP/HTTPS og andre protokoller</h2>
+ 
+
+    <h1>Hvad er HTTP?</h1>
+    <p>HTTP (HyperText Transfer Protocol) er som en postmand, der hjælper din webbrowser 🖥️ med at hente hjemmesider fra serveren 🌐. Når du besøger en hjemmeside, sender din browser en anmodning til serveren, som derefter sender de nødvendige filer (som tekst 📝, billeder 🖼️ og videoer 🎥) tilbage, så du kan se siden.</p>
+
+    <h2>📩 1. Anmodninger (Requests)</h2>
+    <p>Når du besøger en hjemmeside, sender din browser en "GET"-anmodning til serveren for at hente de filer, den har brug for. Det svarer til at du sender en besked til serveren om, hvad du vil se.</p>
+
+    <h2>📤 2. Svar (Responses)</h2>
+    <p>Når serveren modtager anmodningen, sender den et svar tilbage til din browser. Hvis alt er godt, får du de filer, du bad om. Hvis noget går galt, får du en fejlmeddelelse, f.eks. 404 Not Found 🚫, hvis serveren ikke kan finde den ønskede side.</p>
+
+    <h2>✅❌ 3. Statuskoder</h2>
+    <p>Serveren sender en statuskode som svar på din anmodning:</p>
+    <ul>
+        <li><strong>200 OK</strong> 👍 betyder, at alt gik godt, og du får de nødvendige data.</li>
+        <li><strong>404 Not Found</strong> 🚫 betyder, at serveren ikke kunne finde den side, du bad om.</li>
+    </ul>
+
+    <h2>🔒 4. HTTPS (Sikker HTTP)</h2>
+    <p>HTTPS er den sikre version af HTTP. Det betyder, at de data, der sendes mellem din browser og serveren, bliver krypteret og beskyttet mod hackere 🕵️‍♂️. Det gør det mere sikkert at browse på internettet.</p>
+
+
+    
+    <ul>
+      <li><strong>FTP:</strong> Filoverførsel mellem client og server</li>
+      <li><strong>SMTP:</strong> Afsendelse af e-mails</li>
+      <li><strong>IMAP/POP3:</strong> Modtagelse af e-mails</li>
+      <li><strong>WebSocket:</strong> To-vejs kommunikation over TCP</li>
+      <li><strong>TCP/IP:</strong> Netværkskommunikation</li>
+      <li><strong>DNS:</strong> Oversætter IP til domænenavn</li>
+      <li><strong>TLS/SSL:</strong> Kryptering af data</li>
+      <li><strong>SSH:</strong> Sikker fjernadgang</li>
+    </ul>
+  </section>
+  <h1>HTTP Request Metoder</h1>
+
+  <h2>1. GET 📥</h2>
+  <p><strong>Formål:</strong> Hente data fra serveren.</p>
+  <p><strong>Eksempel:</strong> Når du besøger en hjemmeside, bruger din browser en GET-anmodning for at hente HTML-filen, billederne og andre ressourcer.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren sender de ønskede data (som HTML, billeder eller tekst) tilbage til browseren.</p>
+  <p><strong>Brug:</strong> Når du bare vil læse eller vise information (uden at ændre noget på serveren).</p>
+
+  <h2>2. POST 📤</h2>
+  <p><strong>Formål:</strong> Sende data til serveren.</p>
+  <p><strong>Eksempel:</strong> Når du udfylder en formular på en hjemmeside (som en loginformular eller en kontaktformular), bruges POST til at sende de oplysninger, du har indtastet, til serveren.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren modtager de data, du har sendt, og kan bruge dem til at oprette, opdatere eller behandle noget.</p>
+  <p><strong>Brug:</strong> Når du skal sende informationer til serveren, f.eks. ved login, tilmelding eller opdatering af data.</p>
+
+  <h2>3. PUT 📝</h2>
+  <p><strong>Formål:</strong> Erstatte eksisterende data på serveren.</p>
+  <p><strong>Eksempel:</strong> Hvis du opdaterer en profil på en hjemmeside, kan en PUT-anmodning bruges til at erstatte de gamle data med de nye.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren modtager de nye data og opdaterer den eksisterende ressource.</p>
+  <p><strong>Brug:</strong> Når du vil erstatte hele en ressource med nye data, f.eks. opdatere en hel artikel eller brugerprofil.</p>
+
+  <h2>4. DELETE 🗑️</h2>
+  <p><strong>Formål:</strong> Slette data på serveren.</p>
+  <p><strong>Eksempel:</strong> Hvis du sletter en artikel eller en brugerprofil på en hjemmeside, vil der blive sendt en DELETE-anmodning til serveren.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren fjerner den ønskede ressource.</p>
+  <p><strong>Brug:</strong> Når du vil fjerne noget permanent fra serveren.</p>
+
+  <h2>5. PATCH 🔨</h2>
+  <p><strong>Formål:</strong> Opdatere en del af eksisterende data.</p>
+  <p><strong>Eksempel:</strong> Hvis du kun vil ændre én ting i din profil (f.eks. din e-mailadresse), kan en PATCH-anmodning bruges til kun at opdatere den del af dataen.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren opdaterer kun de dele af ressource, som du har ændret, uden at erstatte hele ressource.</p>
+  <p><strong>Brug:</strong> Når du kun vil opdatere en del af en ressource i stedet for at erstatte det hele.</p>
+
+  <h2>6. HEAD 🧑‍💼</h2>
+  <p><strong>Formål:</strong> Hente metadata om en ressource uden at hente selve indholdet.</p>
+  <p><strong>Eksempel:</strong> Hvis du vil vide, om en ressource (f.eks. en fil eller en webside) findes, kan du sende en HEAD-anmodning for kun at få metadata som statuskoder, længde på indhold osv.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren sender kun header-informationer, ikke selve ressourcen.</p>
+  <p><strong>Brug:</strong> Når du bare er interesseret i information om en ressource, som f.eks. om den er tilgængelig.</p>
+
+  <h2>7. OPTIONS ⚙️</h2>
+  <p><strong>Formål:</strong> Spørge serveren, hvilke metoder der er tilladt for en ressource.</p>
+  <p><strong>Eksempel:</strong> Når en browser vil vide, om den kan sende en POST-anmodning til en server, kan den først sende en OPTIONS-anmodning.</p>
+  <p><strong>Hvordan det virker:</strong> Serveren svarer med de tilladte HTTP-metoder, f.eks. GET, POST, eller PUT.</p>
+  <p><strong>Brug:</strong> Når du vil finde ud af, hvilke handlinger du kan udføre på en ressource.</p>
+
+  <h2>Sammenfatning</h2>
+  <ul>
+      <li><strong>GET:</strong> Hent data.</li>
+      <li><strong>POST:</strong> Send data.</li>
+      <li><strong>PUT:</strong> Erstat eksisterende data.</li>
+      <li><strong>DELETE:</strong> Slet data.</li>
+      <li><strong>PATCH:</strong> Opdater del af data.</li>
+      <li><strong>HEAD:</strong> Hent metadata (ingen data).</li>
+      <li><strong>OPTIONS:</strong> Find ud af, hvilke metoder serveren tillader.</li>
+  </ul>
+  <section>
+ 
+    <p>Referencer:</p>
+    <ul>
+        <a href="https://www.w3schools.com/whatis/whatis_http.asp">HTTP w3schools</a>
+        <br>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP Methods MDN</a>
+    </ul>
+  </section>
+  </div>
+</body>
+</html>
+
+    </body>
+</html>
