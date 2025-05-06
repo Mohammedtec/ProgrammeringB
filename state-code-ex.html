@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forløb</title>
+        <style>
+        .header3 {
+            text-align: center !important;
+            font-size: 40px;
+        }
+        .leftcolumn2 {
+            border: 1px solid black;
+            padding: 50px;
+            
+            
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header3">Forløb</div>
+        <nav class="menu">
+            <!-- <a href="Forside.html">Forside</a> -->
+            <!-- <a href="Programmering-eksempler.html">Programmering Emner</a> -->
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="index.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+
+        <div class="leftcolumn2">
+            <h2>State Patten kode eksempel</h2>
+            <p>Koden her viser et eksempel på en Character til et spil.</p>
+            <p>Normalt så vil vi bygge koden for character således.</p>
+            <p>
+                <code>
+                public class Character {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;private String state;<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public Character() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.state = "idle";<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public void setState(String newState) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.state = newState;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public void update() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (state.equals("idle")) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Standing still...");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (state.equals("running")) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Running forward!");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (state.equals("jumping")) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Jumping in the air!");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Unknown state.");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }
+                </code>
+            </p>
+            <p>
+                <code>
+                public class Game {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character character = new Character();<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.setState("running");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.setState("jumping");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }
+                </code>
+            </p>
+
+            <h2>Hvorfor er det en dårlig kode ?</h2>
+            <p>Alt logik i en klasse, og er imod single responbillity princip</p>
+            <p>Vi kan ikke tilføje nye states uden at ændre i koden Update()</p>
+            <br>
+            <br>
+            <br>
+
+
+            <h2>Character program med State Pattern</h2>
+
+            <p>Vi laver en interface som hedder State</p>
+            <p>
+                <code>
+                public interface State {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;void handle();<br>
+                }
+                </code>
+            </p>
+
+            <p> vi laver en abstrakt klasse og har en handle() metode. <br>
+                alle states skal implementere denne metode. <br>
+
+            </p>
+            
+           <p>
+                <code>
+                public class IdleState implements State {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public void handle() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Standing still...");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }<br><br>
+                public class RunningState implements State {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public void handle() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Running forward!");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }<br><br>
+                public class JumpingState implements State {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;public void handle() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Jumping in the air!");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }
+                </code>
+            </p>
+
+        <p> vi opretter klasser for et hvert adfærd for vores spiller og hvad spilleren skal gør.</p>
+        <br>
+        <br>
+        <p>
+            <code>
+            public class Character {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;private State currentState;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;public Character() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currentState = new IdleState();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;public void setState(State newState) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.currentState = newState;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;public void update() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currentState.handle();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            }
+            </code>
+        </p>
+
+        <p>opretter Public class character som holder styr på vores state.
+            <br>
+            update() metoden kalder handle() metoden i den aktuelle state.
+        </p>
+
+        <p>
+        <code>
+        public class Game {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character character = new Character();<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.setState(new RunningState());<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.setState(new JumpingState());<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character.update();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        }<br>
+        </code>
+        Til sidst i main metoden opretter vi en karakter og kalder update() metoden.
+        </p>
+        </p>
+
+    </body>
+</html>
