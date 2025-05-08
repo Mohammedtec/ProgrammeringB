@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Pattern Eksempel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+         button {
+            font-family: Arial, sans-serif;
+            
+            
+            
+            
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 45%
+        }
+
+        #lightStatus {
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Command Pattern Eksempel</h1>
+    <nav class="menu">
+        <a href="Litteratur.html">Litteratur</a>
+        <a href="index.html">Forløb</a>
+        <a href="Info.html">Info</a>
+    </nav>
+    <p id="lightStatus">Lys er slukket.</p>
+    <button id="turnOnButton">Tænd Lys</button>
+    <button id="turnOffButton">Sluk Lys</button>
+
+    <script>
+        // Receiver: Lys
+        class Light {
+            turnOn() {
+                document.getElementById('lightStatus').textContent = 'Lys er tændt.';
+            }
+            
+            turnOff() {
+                document.getElementById('lightStatus').textContent = 'Lys er slukket.';
+            }
+        }
+
+        // Command Interface
+        class Command {
+            execute() {
+                throw new Error("Metoden 'execute()' skal implementeres.");
+            }
+        }
+
+        // Concrete Command - Tænd Lys
+        class TurnOnLightCommand extends Command {
+            constructor(light) {
+                super();
+                this.light = light;
+            }
+
+            execute() {
+                this.light.turnOn();
+            }
+        }
+
+        // Concrete Command - Sluk Lys
+        class TurnOffLightCommand extends Command {
+            constructor(light) {
+                super();
+                this.light = light;
+            }
+
+            execute() {
+                this.light.turnOff();
+            }
+        }
+
+        // Invoker: Remote Control (fjernbetjening)
+        class RemoteControl {
+            constructor() {
+                this.command = null;
+            }
+
+            setCommand(command) {
+                this.command = command;
+            }
+
+            pressButton() {
+                this.command.execute();
+            }
+        }
+
+        // Opret receiver (Light)
+        const light = new Light();
+
+        // Opret konkrete kommandoer
+        const turnOnCommand = new TurnOnLightCommand(light);
+        const turnOffCommand = new TurnOffLightCommand(light);
+
+        // Opret invoker (RemoteControl)
+        const remoteControl = new RemoteControl();
+
+        // Håndter knapklik
+        document.getElementById('turnOnButton').addEventListener('click', () => {
+            remoteControl.setCommand(turnOnCommand);
+            remoteControl.pressButton();
+        });
+
+        document.getElementById('turnOffButton').addEventListener('click', () => {
+            remoteControl.setCommand(turnOffCommand);
+            remoteControl.pressButton();
+        });
+    </script>
+<h1>Command Pattern i Java</h1>
+
+<h2>1. Command Interface</h2>
+<p>Command er et interface, der definerer en metode kaldet <code>execute()</code>. Denne metode skal implementeres af alle konkrete kommandoer.</p>
+
+<pre><code>public interface Command {
+  void execute();
+}
+</code></pre>
+
+<p>Denne metode repræsenterer den handling, som kommandoen skal udføre. Interface'et gør det muligt at skabe forskellige konkrete kommandoer, der kan udføre forskellige handlinger, men på samme måde kaldes de alle gennem <code>execute()</code>.</p>
+
+<h2>2. Concrete Commands</h2>
+<p>Disse klasser implementerer <code>Command</code>-interfacet og definerer den specifikke handling, der skal udføres.</p>
+
+<h3>TurnOnLightCommand</h3>
+<pre><code>public class TurnOnLightCommand implements Command {
+  private Light light;
+
+  public TurnOnLightCommand(Light light) {
+      this.light = light;
+  }
+
+  @Override
+  public void execute() {
+      light.turnOn();
+  }
+}
+</code></pre>
+
+<p><code>TurnOnLightCommand</code> er en konkret implementering af <code>Command</code>. Den er ansvarlig for at tænde lyset.</p>
+
+<p>Den holder en reference til et <code>Light</code>-objekt (modtageren), som udfører den faktiske handling (tænde lyset).</p>
+
+<p>I <code>execute()</code> kalder den <code>light.turnOn()</code>, som tænder lyset.</p>
+
+<h3>TurnOffLightCommand</h3>
+<pre><code>public class TurnOffLightCommand implements Command {
+  private Light light;
+
+  public TurnOffLightCommand(Light light) {
+      this.light = light;
+  }
+
+  @Override
+  public void execute() {
+      light.turnOff();
+  }
+}
+</code></pre>
+
+<p><code>TurnOffLightCommand</code> er en anden konkret kommando, der er ansvarlig for at slukke lyset.</p>
+<p>Som i <code>TurnOnLightCommand</code> har den en reference til et <code>Light</code>-objekt og kalder <code>light.turnOff()</code> i sin <code>execute()</code>-metode.</p>
+
+<h2>3. Receiver (Light)</h2>
+<pre><code>public class Light {
+  public void turnOn() {
+      System.out.println("The light is on.");
+  }
+
+  public void turnOff() {
+      System.out.println("The light is off.");
+  }
+}
+</code></pre>
+
+<p><code>Light</code> er receiveren, som udfører den faktiske handling, når kommandoen bliver udført.</p>
+
+<p><code>turnOn()</code> og <code>turnOff()</code> er metoder, der henholdsvis tænder og slukker lyset og skriver en besked ud i konsollen.</p>
+
+<p><code>Light</code>-objektet er det, som de konkrete kommandoer (f.eks. <code>TurnOnLightCommand</code>) interagerer med.</p>
+
+<h2>4. Invoker (RemoteControl)</h2>
+<pre><code>public class RemoteControl {
+  private Command command;
+
+  public void setCommand(Command command) {
+      this.command = command;
+  }
+
+  public void pressButton() {
+      command.execute();
+  }
+}
+</code></pre>
+
+<p><code>RemoteControl</code> er invokeren, der håndterer kommandoerne.</p>
+
+<p>Den holder en reference til en <code>Command</code> (dvs. den kommando, der skal udføres). <code>setCommand()</code> bruges til at tildele den kommando, som skal udføres, og <code>pressButton()</code> kalder <code>execute()</code> på den tildelte kommando.</p>
+
+<p>Invokeren kender ikke de konkrete detaljer om, hvad kommandoen gør. Den ved bare, at den kan kalde <code>execute()</code> for at få kommandoen til at blive udført.</p>
+
+<h2>5. Client (Main)</h2>
+<pre><code>public class Main {
+  public static void main(String[] args) {
+      // Opret receiver (Light)
+      Light light = new Light();
+
+      // Opret konkrete kommandoer
+      Command turnOn = new TurnOnLightCommand(light);
+      Command turnOff = new TurnOffLightCommand(light);
+
+      // Opret invoker (RemoteControl)
+      RemoteControl remoteControl = new RemoteControl();
+
+      // Brug remoteControl til at styre lyset
+      remoteControl.setCommand(turnOn);
+      remoteControl.pressButton();  // The light is on.
+
+      remoteControl.setCommand(turnOff);
+      remoteControl.pressButton();  // The light is off.
+  }
+}
+</code></pre>
+
+<p><code>Main</code> er klienten, der sætter alt sammen.</p>
+
+<ul>
+  <li>Først oprettes et <code>Light</code>-objekt (receiveren).</li>
+  <li>Derefter oprettes de konkrete kommandoer (<code>TurnOnLightCommand</code> og <code>TurnOffLightCommand</code>), som tager <code>Light</code> som parameter og styrer lyset.</li>
+  <li><code>RemoteControl</code> oprettes som invokeren, og vi tilknytter de relevante kommandoer til den.</li>
+  <li>Når knappen trykkes (via <code>pressButton()</code>), udføres kommandoen, og lyset tændes eller slukkes.</li>
+</ul>
+
+<h2>Hvordan virker det sammen?</h2>
+<p>Kommandoerne (f.eks. <code>TurnOnLightCommand</code> og <code>TurnOffLightCommand</code>) indkapsler en bestemt handling, der kan udføres på en receiver (i dette tilfælde et <code>Light</code>-objekt).</p>
+
+<p>Invoker (i dette tilfælde <code>RemoteControl</code>) holder en reference til en <code>Command</code> og kalder den gennem <code>execute()</code>. Invokeren ved ikke, hvad kommandoen gør, den ved kun, hvordan den skal udføres.</p>
+
+<p>Client (hovedmetoden) sætter alt sammen: den opretter en receiver (<code>Light</code>), en invoker (<code>RemoteControl</code>), og de konkrete kommandoer og sender dem videre til invokeren. Invokeren kan derefter eksekvere kommandoerne, når det er nødvendigt.</p>
+
+<h2>Fordele ved Command Pattern</h2>
+<ul>
+  <li><strong>Adskillelse af ansvar:</strong> Kommandoerne er adskilt fra den konkrete handling. Invokeren behøver ikke at kende til de konkrete detaljer om, hvad der sker i kommandoen, kun at det skal eksekveres.</li>
+  <li><strong>Fleksibilitet:</strong> Det er nemt at tilføje nye kommandoer uden at ændre eksisterende kode.</li>
+  <li><strong>Undo/Redo:</strong> Med Command Pattern kan du implementere funktionalitet til at fortryde eller gentage kommandoer ved at gemme en historik af udførte kommandoer.</li>
+</ul>
+</html>
