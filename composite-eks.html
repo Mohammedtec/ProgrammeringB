@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forløb</title>
+        <style>
+        .header3 {
+            text-align: center !important;
+            font-size: 40px;
+        }
+        .leftcolumn2 {
+            border: 1px solid black;
+            padding: 20px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header3">Composite patten Kode eksempel.</div>
+        <nav class="menu">
+            <!-- <a href="Forside.html">Forside</a> -->
+            <!-- <a href="Programmering-eksempler.html">Programmering Emner</a> -->
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="index.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+        <div class="row">
+            <div class="leftcolumn2">
+               
+                <br>
+                <h2>  Hvad er Composite Pattern?</h2>
+          <br>
+          <br>
+            <p>Composite Pattern bruges når du vil arbejde med objekter, der kan have underelementer (som mapper der indeholder andre mapper og filer) og enkeltstående objekter (som dokumenter), men du vil behandle dem ens. Det gør det muligt at arbejde med både "dele" og "helheder" med samme interface.</p>
+            <br>
+
+            <strong>Interface FileComponent</strong>
+            <br>
+            <br>
+            <code>
+                interface FileComponent {  <br>
+                    &nbsp  void display(String indent); <br>  
+                    &nbsp int getSize();  <br>
+                }
+                  
+            </code>
+            <br>
+            <p>
+                Dette er et interface, altså en "kontrakt" der siger: enhver klasse, der implementerer FileComponent, skal have disse to metoder:
+                <br><br>
+                display(String indent): Bruges til at vise filstrukturen, med indryk (indent) for at vise hierarkiet visuelt.
+                <br><br>
+                getSize(): Returnerer størrelsen (i kilobyte) af objektet — enten en fil eller summen af indholdet i en mappe.
+                <br><br>
+                Dette interface gør det muligt at behandle DocumentFile og Folder ens i vores program.
+            </p>
+            <br>
+            <br>
+            <strong>Klasse DocumentFile (leaf)</strong>
+            <br>
+            <code>
+                class DocumentFile implements FileComponent {  
+                    <br>
+                    &nbsp; String name;  
+                    <br>
+                    &nbsp; int size;  
+                    <br>
+                  
+                    &nbsp; DocumentFile(String name, int size) {  
+                        <br>
+                        &nbsp; &nbsp; this.name = name;  
+                        <br>
+                        &nbsp; &nbsp; this.size = size;  
+                        <br>
+                    }  
+                    <br>
+                  
+                    &nbsp; public void display(String indent) {  
+                        <br>
+                        &nbsp; &nbsp; println(indent + "- File: " + name + " (" + size + " KB)");  
+                        <br>
+                    }  
+                    <br>
+                  
+                    &nbsp; public int getSize() {  
+                        <br>
+                        &nbsp; &nbsp; return size;  
+                        <br>
+                    }  
+                    <br>
+                }  
+                  
+            </code>
+
+            <br>
+            <p>
+                Dette er en Composite: en struktur der kan indeholde både filer og mapper.
+                <br><br>
+                name: Navnet på mappen.
+                <br><br>
+                children: En liste over elementer (kan være både DocumentFile eller Folder) – derfor er typen FileComponent.
+                <br><br>
+                add(...): Metode til at tilføje filer/mapper til mappen.
+                <br><br>
+                display(...): Skriver navnet på mappen med +, og kalder derefter display(...) på hvert barn med ekstra indryk (indent + " ") for visuelt hierarki.
+                <br><br>
+                getSize(): Går igennem alle børn (recursivt) og summerer deres størrelser.
+                <br><br>
+                Her bruges rekursion: mapper kalder getSize() og display() på deres egne mapper osv.
+            </p>
+
+            <br>
+
+            <strong>Klasse Folder (composite)</strong>
+            <code>
+
+                class Folder implements FileComponent {  
+                    <br>
+                    &nbsp; String name;  
+                    <br>
+                    &nbsp; ArrayList<FileComponent> children = new ArrayList<>();  
+                    <br>
+                  
+                    &nbsp; Folder(String name) {  
+                        <br>
+                        &nbsp; &nbsp; this.name = name;  
+                        <br>
+                    }  
+                    <br>
+                  
+                    &nbsp; public void add(FileComponent file) {  
+                        <br>
+                        &nbsp; &nbsp; children.add(file);  
+                        <br>
+                    }  
+                    <br>
+                  
+                    &nbsp; public void display(String indent) {  
+                        <br>
+                        &nbsp; &nbsp; println(indent + "+ Folder: " + name);  
+                        <br>
+                        &nbsp; &nbsp; for (FileComponent child : children) {  
+                            <br>
+                            &nbsp; &nbsp; &nbsp; child.display(indent + " ");  
+                            <br>
+                        }  
+                        <br>
+                    }  
+                    <br>
+                  
+                    &nbsp; public int getSize() {  
+                        <br>
+                        &nbsp; &nbsp; int totalSize = 0;  
+                        <br>
+                        &nbsp; &nbsp; for (FileComponent child : children) {  
+                            <br>
+                            &nbsp; &nbsp; &nbsp; totalSize += child.getSize();  
+                            <br>
+                        }  
+                        <br>
+                        &nbsp; &nbsp; return totalSize;  
+                        <br>
+                        &nbsp; }  <br>
+                } <br>
+<br>
+<br>
+            </code>
+            <strong>Main</strong>
+            <br>
+            <code>
+                void setup() {  
+                    <br><br>
+                    &nbsp; Folder root = new Folder("Root");  
+                    <br><br>
+                    &nbsp; root.add(new DocumentFile("resume.pdf", 120));  
+                    <br><br>
+                    &nbsp; root.add(new DocumentFile("notes.txt", 45));  
+                    <br><br>
+                    &nbsp; Folder images = new Folder("Images");  
+                    <br><br>
+                    &nbsp; images.add(new DocumentFile("photo1.jpg", 200));  
+                    <br><br>
+                    &nbsp; images.add(new DocumentFile("photo2.jpg", 180));  
+                    <br><br>
+                    &nbsp; root.add(images);  
+                    <br><br>
+                    &nbsp; Folder music = new Folder("Music");  
+                    <br><br>
+                    &nbsp; music.add(new DocumentFile("song1.mp3", 5000));  
+                    <br><br>
+                    &nbsp; root.add(music);  
+                    <br><br>
+                    &nbsp; // Udskriv strukturen  
+                    &nbsp; root.display("");  
+                    <br><br>
+                    &nbsp; println("\nTotal størrelse: " + root.getSize() + " KB");  
+                    <br><br>
+                }  
+            </code>
+
+            <p>
+                I setup() oprettes mappen "Root", og der tilføjes dokumenter og undermapper som "Images" og "Music", <br><br>
+                som igen indeholder egne filer. Alle filer har en størrelse, og mapperne kan indeholde andre elementer. <br><br>
+
+                Metoden root.display("") viser hele strukturen med indryk, og root.getSize() beregner den samlede størrelse. <br><br>
+                rekursivt. Mønsteret gør det nemt at arbejde med både enkelte filer og komplekse mappestrukturer på samme måde.
+            </p>
+            </div>
+          
+    </body>
