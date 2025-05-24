@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forløb</title>
+        <style>
+        .header3 {
+            text-align: center !important;
+            font-size: 40px;
+        }
+        .leftcolumn2 {
+            border: 1px solid black;
+            padding: 20px;
+        }
+        code {
+            display: block;
+            background-color: #c4c0c0; /* svag grå */
+            color: #222;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15px;
+            white-space: pre-line;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header3">builder patten eksempel.</div>
+        <nav class="menu">
+            <!-- <a href="Forside.html">Forside</a> -->
+            <!-- <a href="Programmering-eksempler.html">Programmering Emner</a> -->
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="index.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+        <div class="row">
+            <div class="leftcolumn2">
+
+                
+    Enemy-klassen repræsenterer en fjende i spillet.<br>
+    Alle felter er 'final', så de kun kan sættes én gang gennem builderen.<br>
+   <code> public class Enemy {<br>
+        private final String navn;<br>
+        private final int liv;<br>
+        private final int skade;<br>
+        private final String våben;<br>
+        private final boolean kanBrugMagi;<br>
+        <br>
+        </code>
+        Privat konstruktør - kun EnemyBuilder kan oprette Enemy-objekter.<br>
+        <br>
+        <code>
+            private Enemy(EnemyBuilder builder) {<br>
+                this.navn = builder.navn;<br>
+                this.liv = builder.liv;<br>
+                this.skade = builder.skade;<br>
+                this.våben = builder.våben;<br>
+                this.kanBrugMagi = builder.kanBrugMagi;<br>
+        </code>
+        }<br>
+        <br>
+        Overskriver toString() for at vise alle værdierne for Enemy-objektet.<br>
+        <code>
+            @Override<br>
+            public String toString() {<br>
+                return "Enemy [Navn=" + navn +<br>
+                   ", Liv=" + liv +<br>
+                   ", Skade=" + skade +<br>
+                   ", Våben=" + våben +<br>
+                   ", Kan bruge magi=" + kanBrugMagi + "]";<br>
+            }<br>
+        </code>
+        <br>
+        Builder-klassen bruges til at bygge Enemy-objekter på en fleksibel måde.<br>
+        Man bruger builder pattern når der er mange valgfri felter eller hvis objektet er komplekst.<br>
+        Det gør koden mere læsbar og undgår mange forskellige konstruktører med mange parametre.<br>
+        <br>
+        <code>
+            public static class EnemyBuilder {<br>
+                private final String navn;<br>
+                private int liv = 100;<br>
+                private int skade = 10;<br>
+                private String våben = "Næver";<br>
+                private boolean kanBrugMagi = false;<br>
+                <br>
+         </code>
+            Builderen kræver altid et navn.<br>
+            Den kræver et navn, fordi navnet (`navn`) er defineret som `final` i Enemy-klassen og skal altid sættes, når objektet oprettes.<br>
+            Ved at kræve navnet i builderens konstruktør sikrer man, at alle Enemy-objekter altid har et gyldigt navn, og at dette vigtige felt ikke kan glemmes eller være tomt.<br><br>
+            <code>
+                        public EnemyBuilder(String navn) {<br>
+                            this.navn = navn;<br>
+            </code>
+            }<br>
+            Sæt liv og returner builderen (for chaining).<br>
+            <code>
+                public EnemyBuilder medLiv(int liv) {<br>
+                    this.liv = liv;<br>
+                    return this;<br>
+                }<br>
+            </code>
+            Sæt skade og returner builderen.<br>
+            <br>
+            <code>
+                public EnemyBuilder medSkade(int skade) {<br>
+                    this.skade = skade;<br>
+                    return this;<br>
+                }<br>
+            </code>
+            }<br>
+            Sæt våben og returner builderen.<br>
+            <code>
+                public EnemyBuilder medVåben(String våben) {<br>
+                    this.våben = våben;<br>
+                    return this;<br>
+                }<br>
+            </code>
+            Gør så fjenden kan bruge magi.<br>
+            <code>
+                public EnemyBuilder medMagi() {<br>
+                    this.kanBrugMagi = true;<br>
+                    return this;<br>
+                }<br>
+            </code>
+            Byg det færdige Enemy-objekt.<br>
+            <code>
+                        public Enemy build() {<br>
+                            return new Enemy(this);<br>
+                        }<br>
+            </code>
+            }<br>
+        }<br>
+    }<br>
+</code>
+<p>
+    <b>Hvorfor bruger man Builder Pattern? (dyb forklaring)</b><br>
+    <br>
+    Når man skal oprette objekter i Java, bruger man ofte konstruktører. Men hvis et objekt har mange felter, hvoraf nogle er valgfrie, kan det hurtigt blive uoverskueligt med mange forskellige konstruktører (constructor overloading) eller lange parameterlister, hvor man let kan bytte rundt på værdierne.<br><br>
+
+    <b>Problemer uden builder:</b><br>
+    - Hvis du har mange parametre, kan det være svært at huske rækkefølgen.<br>
+    - Hvis nogle felter er valgfrie, skal du lave mange forskellige konstruktører.<br>
+    - Koden bliver svær at læse og vedligeholde.<br>
+    <br>
+    <b>Fordele ved Builder Pattern:</b><br>
+    - Du kan nemt og tydeligt sætte kun de felter, du har brug for, med navngivne metoder.<br>
+    - Du undgår fejl, fordi du ikke skal huske rækkefølgen på parametre.<br>
+    - Du kan lave immutable (uforanderlige) objekter, fordi alle felter kan være <code>final</code> og kun sættes én gang i builderen.<br>
+    - Koden bliver mere læsbar, fordi det er tydeligt, hvad der bliver sat:<br>
+    <code>
+    Enemy ork = new Enemy.EnemyBuilder("Ork")<br>
+        .medLiv(80)<br>
+        .medSkade(15)<br>
+        .medVåben("Økse")<br>
+        .medMagi()<br>
+        .build();<br>
+    </code>
+    <br>
+    Her kan du tydeligt se, hvad der bliver sat, og du kan undlade de felter, du ikke har brug for (de får bare standardværdier).<br>
+    <br>
+    <b>Hvordan virker det?</b><br>
+    - Builder-klassen har samme felter som hovedklassen, men med standardværdier.<br>
+    - Du sætter værdierne med metoder som medLiv(), medSkade() osv. Hver metode returnerer builderen selv, så du kan kæde dem sammen.<br>
+    - Når du er færdig, kalder du build(), som laver det færdige objekt.<br>
+    - Hovedklassens konstruktør er privat, så du kan kun oprette objektet gennem builderen. Det sikrer, at objektet altid er korrekt oprettet.<br>
+    <br>
+    <b>Hvornår skal man bruge Builder Pattern?</b><br>
+    - Når et objekt har mange felter, især hvis mange af dem er valgfrie.<br>
+    - Når du vil gøre din kode mere læsbar og undgå fejl med lange konstruktør-parametre.<br>
+    - Når du vil lave immutable objekter.<br>
+    <br>
+    <b>Ekstra:</b><br>
+    Builder pattern er meget brugt i store projekter og frameworks (fx i Java's StringBuilder eller java.time.LocalDateTime.Builder), fordi det gør koden robust og nem at udvide senere.
+</p>
+         </div>
+
+</body>
+</html>
