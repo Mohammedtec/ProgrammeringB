@@ -135,10 +135,50 @@
         }<br>
     }<br>
 </code>
+<code>
+public class Game {
+    public static void main(String[] args) {
+        Enemy zombie = new Enemy.EnemyBuilder("Zombie")
+                            .medLiv(150)
+                            .medSkade(20)
+                            .medVåben("Bid")
+                            .build();
+
+        Enemy darkWizard = new Enemy.EnemyBuilder("Dark Wizard")
+                            .medLiv(100)
+                            .medSkade(30)
+                            .medVåben("Tryllestav")
+                            .medMagi()
+                            .build();
+
+        Enemy goblin = new Enemy.EnemyBuilder("Goblin")
+                            .build(); // bruger standardværdier
+
+        System.out.println(zombie);
+        System.out.println(darkWizard);
+        System.out.println(goblin);
+    }
+}
+</code>
+
 <p>
-    <b>Hvorfor bruger man Builder Pattern? (dyb forklaring)</b><br>
+Koden viser, hvordan man bruger **Builder Pattern** til at oprette forskellige `Enemy`-objekter på en fleksibel og overskuelig måde:
+
+- Der oprettes tre fjender: `zombie`, `darkWizard` og `goblin`.
+- For hver fjende bruges `EnemyBuilder` til at sætte de ønskede værdier:
+  - `zombie` får navn, liv, skade og våben sat.
+  - `darkWizard` får navn, liv, skade, våben og kan bruge magi.
+  - `goblin` får kun navn – resten får standardværdier.
+- `build()` laver det færdige `Enemy`-objekt.
+- Til sidst udskrives alle fjendernes informationer med `System.out.println(...)`, som bruger `toString()`-metoden fra `Enemy`.
+
+**Fordel:**  
+Builder pattern gør det let at læse og forstå, hvilke egenskaber hver fjende har, og du undgår fejl med mange parametre i konstruktøren. Det er især nyttigt, når der er mange valgfrie felter eller objektet er komplekst.
+</p>
+
+<p>
     <br>
-    Når man skal oprette objekter i Java, bruger man ofte konstruktører. Men hvis et objekt har mange felter, hvoraf nogle er valgfrie, kan det hurtigt blive uoverskueligt med mange forskellige konstruktører (constructor overloading) eller lange parameterlister, hvor man let kan bytte rundt på værdierne.<br><br>
+    
 
     <b>Problemer uden builder:</b><br>
     - Hvis du har mange parametre, kan det være svært at huske rækkefølgen.<br>
@@ -160,6 +200,18 @@
     </code>
     <br>
     Her kan du tydeligt se, hvad der bliver sat, og du kan undlade de felter, du ikke har brug for (de får bare standardværdier).<br>
+    <br>
+    <b>Eksempel: Brug af Game-klassen</b><br>
+    Klassen Game viser, hvordan man i praksis bruger builder pattern til at oprette forskellige Enemy-objekter:<br>
+    - Der oprettes tre fjender: zombie, darkWizard og goblin.<br>
+    - For hver fjende bruges EnemyBuilder til at sætte de ønskede værdier.<br>
+    - zombie får navn, liv, skade og våben sat.<br>
+    - darkWizard får navn, liv, skade, våben og kan bruge magi.<br>
+    - goblin får kun navn – resten får standardværdier.<br>
+    - build() laver det færdige Enemy-objekt.<br>
+    - Til sidst udskrives alle fjendernes informationer med System.out.println(...), som bruger toString()-metoden fra Enemy.<br>
+    <br>
+    <b>Fordel:</b> Det er let at læse og forstå, hvilke egenskaber hver fjende har, og du undgår fejl med mange parametre i konstruktøren. Det er især nyttigt, når der er mange valgfrie felter eller objektet er komplekst.<br>
     <br>
     <b>Hvordan virker det?</b><br>
     - Builder-klassen har samme felter som hovedklassen, men med standardværdier.<br>
