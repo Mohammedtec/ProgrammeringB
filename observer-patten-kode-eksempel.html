@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Observer Pattern Forklaring</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .header3 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+      color: #333;
+    }
+    h2, h3 {
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+    <div class="header3">Observer patten</div>
+        <nav class="menu">
+            <!-- <a href="Forside.html">Forside</a> -->
+            <!-- <a href="Programmering-eksempler.html">Programmering Emner</a> -->
+            <a href="Litteratur.html">Litteratur</a>
+            <a href="index.html">Forløb</a>
+            <a href="Info.html">Info</a>
+        </nav>
+
+  <h2>Observer Pattern - Forklaring</h2>
+
+  <p>Det er et designmønster hvor:</p>
+  <ul>
+    <li>En <strong>Subject</strong> (i dette tilfælde: <code>YouTubeChannel</code>) holder styr på en liste af <strong>Observers</strong> (her: <code>User</code>-objekter).</li>
+    <li>Når noget ændrer sig i <code>Subject</code>, får alle <code>Observers</code> besked automatisk via en <code>update()</code>-metode.</li>
+  </ul>
+
+  <h3> Gennemgang af hver klasse og interface:</h3>
+
+  <h4> <code>Subscriber</code> (interface)</h4>
+  <pre><code>public interface Subscriber {
+    void update(String channelName, String videoTitle);
+}</code></pre>
+  <p>Definerer kontrakten: "Enhver der observerer (abonnerer) skal kunne få en besked med kanalnavn og videotitel."</p>
+
+  <h4> <code>Channel</code> (interface)</h4>
+  <pre><code>public interface Channel {
+    void subscribe(Subscriber s);
+    void unsubscribe(Subscriber s);
+    void notifySubscribers(String videoTitle);
+}</code></pre>
+  <p>Definerer de metoder en kanal skal have:</p>
+  <ul>
+    <li>Tilføje abonnent (<code>subscribe</code>)</li>
+    <li>Fjerne abonnent (<code>unsubscribe</code>)</li>
+    <li>Give besked til alle abonnenter (<code>notifySubscribers</code>)</li>
+  </ul>
+
+  <h4> <code>User</code> (klasse der implementerer <code>Subscriber</code>)</h4>
+  <pre><code>public class User implements Subscriber {
+    private String username;
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public void update(String channelName, String videoTitle) {
+        System.out.println(username + " fik besked: '" + videoTitle + "' blev uploadet på " + channelName);
+    }
+}</code></pre>
+  <p>Brugeren (subscriber) har et navn. <br>
+  <code>update()</code> bliver kaldt, når en kanal uploader en video → det viser en besked i konsollen.</p>
+
+  <h4> <code>YouTubeChannel</code> (implementerer <code>Channel</code>)</h4>
+  <pre><code>import java.util.ArrayList;
+import java.util.List;
+
+public class YouTubeChannel implements Channel {
+    private String name;
+    private List&lt;Subscriber&gt; subscribers = new ArrayList<>();</code></pre>
+  <p><code>name</code>: navnet på kanalen. <br>
+  <code>subscribers</code>: en liste af alle brugere, der har abonneret.</p>
+
+  <pre><code>    public YouTubeChannel(String name) {
+        this.name = name;
+    }</code></pre>
+  <p>Constructor: giver kanalen et navn.</p>
+
+  <pre><code>    public void uploadVideo(String videoTitle) {
+        System.out.println("Video uploadet: " + videoTitle + " på " + name);
+        notifySubscribers(videoTitle);
+    }</code></pre>
+  <p>Når en video uploades, vises det i konsollen og alle abonnenter bliver notificeret.</p>
+
+  <pre><code>    @Override
+    public void subscribe(Subscriber s) {
+        subscribers.add(s);
+    }
+
+    @Override
+    public void unsubscribe(Subscriber s) {
+        subscribers.remove(s);
+    }</code></pre>
+  <p>Tilføjer og fjerner abonnenter.</p>
+
+  <pre><code>    @Override
+    public void notifySubscribers(String videoTitle) {
+        for (Subscriber s : subscribers) {
+            s.update(name, videoTitle);
+        }
+    }
+}</code></pre>
+  <p>Går igennem listen af <code>Subscriber</code>-objekter og kalder <code>update()</code> på hver.</p>
+
+  <h4> <code>Main</code> (testklasse)</h4>
+  <pre><code>public class Main {
+    public static void main(String[] args) {
+        YouTubeChannel tech = new YouTubeChannel("TechExplained");
+
+        User alice = new User("Alice");
+        User bob = new User("Bob");
+
+        tech.subscribe(alice);
+        tech.subscribe(bob);
+
+        tech.uploadVideo("Observer Pattern Forklaret");
+
+        tech.unsubscribe(bob);
+
+        tech.uploadVideo("Strategy Pattern Forklaret");
+    }
+}</code></pre>
+
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>En kanal ved navn <strong>TechExplained</strong> bliver oprettet.</li>
+    <li>Brugere <strong>Alice</strong> og <strong>Bob</strong> oprettes.</li>
+    <li>De abonnerer på kanalen.</li>
+    <li>En video uploades → begge får en besked.</li>
+    <li><strong>Bob</strong> afmelder kanalen.</li>
+    <li>En ny video uploades → kun <strong>Alice</strong> får besked.</li>
+  </ul>
+
+  <h3> Hvorfor er det smart?</h3>
+  <ul>
+    <li>Det giver <strong>lav kobling</strong> mellem objektet der sender beskeder og dem der modtager.</li>
+    <li>Du kan tilføje mange subscribers uden at ændre på <code>YouTubeChannel</code>-koden.</li>
+    <li>Det er super fleksibelt og genbrugeligt – brugt i fx GUI-events, meddelelser, notifikationer, m.m.</li>
+  </ul>
+
+</body>
+</html>
